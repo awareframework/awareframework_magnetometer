@@ -14,12 +14,12 @@ class MagnetometerSensor extends AwareSensorCore {
   MagnetometerSensor(MagnetometerSensorConfig config):this.convenience(config);
   MagnetometerSensor.convenience(config) : super(config){
     /// Set sensor method & event channels
-    super.setSensorChannels(_magnetometerMethod, _magnetometerStream);
+    super.setMethodChannel(_magnetometerMethod);
   }
 
   /// A sensor observer instance
-  Stream<Map<String,dynamic>> get onDataChanged {
-     return super.receiveBroadcastStream("on_data_changed").map((dynamic event) => Map<String,dynamic>.from(event));
+  Stream<Map<String,dynamic>> onDataChanged(String id) {
+     return super.getBroadcastStream(_magnetometerStream, "on_data_changed", id).map((dynamic event) => Map<String,dynamic>.from(event));
   }
 }
 
@@ -37,9 +37,11 @@ class MagnetometerSensorConfig extends AwareSensorConfig{
 
 /// Make an AwareWidget
 class MagnetometerCard extends StatefulWidget {
-  MagnetometerCard({Key key, @required this.sensor}) : super(key: key);
+  MagnetometerCard({Key key, @required this.sensor, this.cardId = "magnetometer_card", this.hight = 250.0}) : super(key: key);
 
   MagnetometerSensor sensor;
+  String cardId;
+  double hight;
 
   @override
   MagnetometerCardState createState() => new MagnetometerCardState();
@@ -55,10 +57,9 @@ class MagnetometerCardState extends State<MagnetometerCard> {
 
   @override
   void initState() {
-
     super.initState();
     // set observer
-    widget.sensor.onDataChanged.listen((event) {
+    widget.sensor.onDataChanged(widget.cardId).listen((event) {
       setState((){
         if(event!=null){
           DateTime.fromMicrosecondsSinceEpoch(event['timestamp']);
@@ -78,13 +79,19 @@ class MagnetometerCardState extends State<MagnetometerCard> {
   Widget build(BuildContext context) {
     return new AwareCard(
       contentWidget: SizedBox(
-          height:250.0,
+          height:widget.hight,
           width: MediaQuery.of(context).size.width*0.8,
           child: new StreamLineSeriesChart(StreamLineSeriesChart.createTimeSeriesData(dataLine1, dataLine2, dataLine3)),
         ),
       title: "Magnetometer",
       sensor: widget.sensor
     );
+  }
+
+  @override
+  void dispose() {
+    widget.sensor.cancelBroadcastStream(widget.cardId);
+    super.dispose();
   }
 
 }

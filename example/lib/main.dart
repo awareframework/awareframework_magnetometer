@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
       ..debug = true;
 
     sensor = new MagnetometerSensor(config);
+    sensor.start();
 
   }
 
