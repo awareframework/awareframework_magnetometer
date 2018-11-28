@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     config = MagnetometerSensorConfig()
+      ..frequency = 100
       ..debug = true;
 
     sensor = new MagnetometerSensor(config);
@@ -38,7 +39,7 @@ class _MyAppState extends State<MyApp> {
           appBar: new AppBar(
             title: const Text('Plugin Example App'),
           ),
-          body: new MagnetometerCard(sensor: sensor,)
+          body: new MagnetometerCard(sensor: sensor, height: 200.0,)
       ),
     );
   }
