@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       ..frequency = 100
       ..debug = true;
 
-    sensor = new MagnetometerSensor(config);
+    sensor = new MagnetometerSensor.init(config);
     sensor.start();
 
   }

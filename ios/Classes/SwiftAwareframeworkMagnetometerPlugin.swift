@@ -31,8 +31,13 @@ public class SwiftAwareframeworkMagnetometerPlugin: AwareFlutterPluginCore, Flut
     public static func register(with registrar: FlutterPluginRegistrar) {
         let instance = SwiftAwareframeworkMagnetometerPlugin()
         
-        super.setMethodChannel(with: registrar, instance: instance, channelName: "awareframework_magnetometer/method")
-        super.setEventChannels(with: registrar, instance: instance, channelNames:["awareframework_magnetometer/event"])
+        super.setMethodChannel(with: registrar,
+                               instance: instance,
+                               channelName: "awareframework_magnetometer/method")
+        super.setEventChannels(with: registrar,
+                               instance: instance,
+                               channelNames:["awareframework_magnetometer/event",
+                                             "awareframework_magnetometer/event_on_data_changed"])
     }
 
 

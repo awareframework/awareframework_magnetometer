@@ -1,6 +1,8 @@
 # Aware Magnetometer
 
-TODO
+[![Build Status](https://travis-ci.org/awareframework/awareframework_magnetometer.svg?branch=master)](https://travis-ci.org/awareframework/awareframework_magnetometer)
+
+This sensor module allows us to access the current Magnetic Fluid data.
 
 ## Install the plugin into project
 1. Edit `pubspec.yaml`
@@ -19,10 +21,11 @@ import 'package:awareframework_core/awareframework_core.dart';
 ### magnetometer Sensor
 - `start()`
 - `stop()` 
-- `sync(force: Boolean)`
+- `sync(boolean force)`
 - `enable()`
 - `disable()`
 - `isEnable()`
+- `setLabel(String label)`
 
 ### Configuration Keys
 TODO
@@ -52,12 +55,12 @@ var config = MagnetometerSensorConfig()
 // init sensor
 var sensor = new MagnetometerSensor(config);
 
-void mathod(){
+void method(){
     /// start 
     sensor.start();
     
     /// set observer
-    sensor.onDataChanged.listen((Map<String,dynamic> result){
+    sensor.onDataChanged.listen((MagnetometerData data){
       setState((){
         // Your code here
       });
