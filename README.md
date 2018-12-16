@@ -21,7 +21,7 @@ import 'package:awareframework_core/awareframework_core.dart';
 ### magnetometer Sensor
 - `start()`
 - `stop()` 
-- `sync(boolean force)`
+- `sync(bool force)`
 - `enable()`
 - `disable()`
 - `isEnable()`
@@ -53,7 +53,7 @@ var config = MagnetometerSensorConfig()
   ..label = "label";
 
 // init sensor
-var sensor = new MagnetometerSensor(config);
+var sensor = new MagnetometerSensor.init(config);
 
 void method(){
     /// start 

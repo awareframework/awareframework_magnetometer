@@ -1,5 +1,5 @@
 name: awareframework_magnetometer
-description: This sensor module allows us to access the current Magnetic Fluid data.
+description: This sensor module allows us to access the current Magnetic Fluid data
 version: 0.0.5
 author: AWARE Mobile Context Instrumentation Middleware Framework <yuuki.nishiyama@oulu.fi>
 homepage: http://www.awareframework.com
